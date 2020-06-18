@@ -1,0 +1,10 @@
+C:\Users\margo\source\repos\Booking\Booking\bin\Debug\Booking.exe.config
+C:\Users\margo\source\repos\Booking\Booking\bin\Debug\Booking.exe
+C:\Users\margo\source\repos\Booking\Booking\bin\Debug\Booking.pdb
+C:\Users\margo\source\repos\Booking\Booking\bin\Debug\ClassLibrary.dll
+C:\Users\margo\source\repos\Booking\Booking\bin\Debug\ClassLibrary.pdb
+C:\Users\margo\source\repos\Booking\Booking\obj\Debug\Booking.csprojAssemblyReference.cache
+C:\Users\margo\source\repos\Booking\Booking\obj\Debug\Booking.csproj.CoreCompileInputs.cache
+C:\Users\margo\source\repos\Booking\Booking\obj\Debug\Booking.csproj.CopyComplete
+C:\Users\margo\source\repos\Booking\Booking\obj\Debug\Booking.exe
+C:\Users\margo\source\repos\Booking\Booking\obj\Debug\Booking.pdb

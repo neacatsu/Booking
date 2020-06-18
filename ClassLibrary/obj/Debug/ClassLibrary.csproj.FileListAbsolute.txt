@@ -1,0 +1,6 @@
+C:\Users\margo\source\repos\Booking\ClassLibrary\bin\Debug\ClassLibrary.dll
+C:\Users\margo\source\repos\Booking\ClassLibrary\bin\Debug\ClassLibrary.pdb
+C:\Users\margo\source\repos\Booking\ClassLibrary\obj\Debug\ClassLibrary.csprojAssemblyReference.cache
+C:\Users\margo\source\repos\Booking\ClassLibrary\obj\Debug\ClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\margo\source\repos\Booking\ClassLibrary\obj\Debug\ClassLibrary.dll
+C:\Users\margo\source\repos\Booking\ClassLibrary\obj\Debug\ClassLibrary.pdb
