@@ -32,7 +32,7 @@ namespace Booking
                     Miejsca_podrozy.miejsca_p();
                     break;
                 case 2:
-                    //Promocja_lot.promocja();
+                    Promocja_lot.promocja();
                     break;
                 case 3:
                     //Rejestracja.rejestracja();
