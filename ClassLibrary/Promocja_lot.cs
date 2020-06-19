@@ -8,7 +8,7 @@ namespace ClassLibrary
 {
     public class Promocja_lot
     {
-        public static void promocja()
+        public static void Promocja()
         {
             Console.Clear();
             Random rnd = new Random();

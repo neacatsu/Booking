@@ -8,7 +8,7 @@ namespace ClassLibrary
 {
     class Logowanie
     {
-        public static void logowanie()
+        public static void Logowanie_()
         {
             Console.Clear();
             Console.Write("Login:");
@@ -17,8 +17,8 @@ namespace ClassLibrary
             string aktualne_haslo = Console.ReadLine();
 
             Console.WriteLine("Witaj " + aktualny_login);
-            Formularz.form();
-            Formularz.wybor_miejsca();
+            Formularz.Form();
+            Formularz.Wybor_miejsca();
         }
 
     }

@@ -8,7 +8,7 @@ namespace ClassLibrary
 {
     class Formularz
     {
-        public static void form()
+        public static void Form()
         {
             Console.Clear();
             Console.WriteLine();
@@ -39,7 +39,7 @@ namespace ClassLibrary
             else klasa = "biznesowa";
         }
 
-        public static void wybor_miejsca()
+        public static void Wybor_miejsca()
         {
             Console.WriteLine();
             string[,] tablica = new string[16, 6] {
