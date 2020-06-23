@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formularz.cs" />
+    <Compile Include="Logowanie.cs" />
     <Compile Include="Miejsca_podrozy.cs" />
     <Compile Include="Promocja_lot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rejestracja.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,9 +8,15 @@ namespace ClassLibrary
 {
     class Formularz
     {
+        public enum klasa
+        {
+            Biznesowa,
+            Ekonomiczna,
+            AllInclusive
+        }
+
         public static void Form()
         {
-            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Podaj miejsce wylotu");
             string miejsce_wylotu = Console.ReadLine();
@@ -28,15 +34,11 @@ namespace ClassLibrary
             Console.WriteLine("Wybierz klase:");
             Console.WriteLine("1. klasa ekonomiczna");
             Console.WriteLine("2. klasa biznesowa");
+            Console.WriteLine("3. klasa All Inclusive");
+            int numer_klasy = int.Parse(Console.ReadLine());
 
-            string klasa;
-            int numer_kl = int.Parse(Console.ReadLine());
+            var klasa = (klasa)numer_klasy;
 
-            if (numer_kl == 1)
-            {
-                klasa = "ekonomiczna";
-            }
-            else klasa = "biznesowa";
         }
 
         public static void Wybor_miejsca()

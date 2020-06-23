@@ -13,14 +13,24 @@ namespace Booking
         {
             while (true)
             {
-                Console.WriteLine("Witam na stronie Booking");
+               
+                Console.WriteLine("Witamy na stronie Booking");
                 Console.WriteLine("MENU");
                 Console.WriteLine("1. Polecane miejsca");
                 Console.WriteLine("2. Aktualna promocja");
                 Console.WriteLine("3. Rejestracja ");
                 Console.WriteLine("4. Logowanie do systemu ");
-                int wybor = int.Parse(Console.ReadLine());
-                Wybor_menu(wybor);
+                string wybor = Console.ReadLine();
+                int number;
+                if (int.TryParse(wybor, out number) == true)
+                {
+                    number = int.Parse(wybor);
+                }
+                else
+                {
+                    number = 9;
+                }
+                Wybor_menu(number);
             }
         }
         public static void Wybor_menu(int numer)
@@ -29,18 +39,19 @@ namespace Booking
             switch (numer)
             {
                 case 1:
-                    Miejsca_podrozy.miejsca_p();
+                    Miejsca_podrozy.Miejsca_p();
                     break;
                 case 2:
-                    Promocja_lot.promocja();
+                    Promocja_lot.Promocja();
                     break;
                 case 3:
-                    //Rejestracja.rejestracja();
+                    Rejestracja.Rejestracja_();
                     break;
                 case 4:
-                    //Logowanie.logowanie();
+                    Logowanie.Logowanie_();
                     break;
                 default:
+                    Console.Clear();
                     break;
 
             }
