@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    class Formularz
+    public class Formularz
     {
         public enum klasa
         {
@@ -14,16 +15,48 @@ namespace ClassLibrary
             Ekonomiczna,
             AllInclusive
         }
+        public enum miejsca
+        {
+            Kraków,
+            Katowice,
+            Warszawa
+        }
+        public enum cel
+        {
+            Grecja,
+            Bali,
+            Lacjum,
+            Berlin,
+            Stambuł,
+            Oslo,
+            Kenya,
+            Praga,
+            Toronto,
+            Moskwa
+        }
+
 
         public static void Form()
         {
-            Console.WriteLine();
+            var miejsce_enum= Enum.GetNames(typeof(miejsca)).Length;
+            for (int i = 0; i < miejsce_enum; i++)
+            {
+                Console.WriteLine(i+1+" "+(miejsca)i);
+            }
             Console.WriteLine("Podaj miejsce wylotu");
-            string miejsce_wylotu = Console.ReadLine();
+            var miejsce_wylotu = Console.ReadLine();
 
+
+
+            var cel_enum = Enum.GetNames(typeof(cel)).Length;
+            for (int i = 0; i < cel_enum; i++)
+            {
+                Console.WriteLine(i + 1 + " " + (cel)i);
+            }
             Console.WriteLine("Podaj cel podróży");
-            string cel_podrozy = Console.ReadLine();
+            var cel_podrozy = Console.ReadLine();
 
+           
             Console.WriteLine("Podaj date podróży");
             string[] data_wylotu = Console.ReadLine().Split(':');
 
@@ -31,17 +64,27 @@ namespace ClassLibrary
             int ilosc_pasazerow = int.Parse(Console.ReadLine());
 
 
+            var klasa_enum = Enum.GetNames(typeof(klasa)).Length;
+            for (int i = 0; i < klasa_enum; i++)
+            {
+                Console.WriteLine(i + 1 + " " + (klasa)i);
+            }
             Console.WriteLine("Wybierz klase:");
-            Console.WriteLine("1. klasa ekonomiczna");
-            Console.WriteLine("2. klasa biznesowa");
-            Console.WriteLine("3. klasa All Inclusive");
-            int numer_klasy = int.Parse(Console.ReadLine());
+            var klasa = Console.ReadLine();
+            
+            Wybor_miejsca(ilosc_pasazerow);
+            //Rezerwacja.Rezerwacja_( miejsce_wylotu,  cel_podrozy,  data_wylotu,  ilosc_pasazerow,  klasa);
 
-            var klasa = (klasa)numer_klasy;
+
+
+            
+
 
         }
 
-        public static void Wybor_miejsca()
+        public static void Wybor_miejsca(int ilosc_pasazerow)
+
+
         {
             Console.WriteLine();
             string[,] tablica = new string[16, 6] {
@@ -58,7 +101,14 @@ namespace ClassLibrary
                 }
                 Console.WriteLine();
             }
-            string[] wartosc_mierjsca = Console.ReadLine().Split(' ');
+            for(int i=0;i< ilosc_pasazerow; i++)
+            {
+                int j = i + 1;
+                Console.WriteLine("Wybierz miejsce dla "+ j +" pasazera");
+                string[] wartosc_miejsca = Console.ReadLine().Split(' ');
+            }
+            
+            
 
         }
     }

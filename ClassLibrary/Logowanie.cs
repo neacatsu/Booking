@@ -25,6 +25,7 @@ namespace ClassLibrary
                     lista.Add(pobrane_haslo);
                     Console.Clear();
                     Console.WriteLine("Witaj użytkowniku "+ pobrany_login);
+                    Formularz.Form();
                 }
                
                 i += 2;

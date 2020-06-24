@@ -17,6 +17,7 @@ namespace ClassLibrary
             return c > 32 && c < 127;
         }
 
+
         public static string Sprawdzanie_hasla(string wartosc_hasla)
         {
             if (wartosc_hasla.Length <= 8)
@@ -58,10 +59,11 @@ namespace ClassLibrary
                     }
                 }
             }
-            Console.WriteLine("Zostałeś pomyślnie zareejstrowany");
+            Console.WriteLine("Zostałeś pomyślnie zarejestrowany");
             Thread.Sleep(2000);
             Console.Clear();
             Logowanie.Logowanie_();
+
         }
     }
 }
