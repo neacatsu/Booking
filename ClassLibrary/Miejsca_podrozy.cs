@@ -8,7 +8,7 @@ namespace ClassLibrary
 {
     public class Miejsca_podrozy
     {
-        class Miejsca
+        public class Miejsca
         {
             public string Nazwa { get; private set; }
             public string Cena { get; private set; }
@@ -23,7 +23,7 @@ namespace ClassLibrary
             }
         }
 
-        public static void Miejsca_p()
+        public static List<Miejsca> Lista_miejsc()
         {
             Console.Clear();
             List<Miejsca> lista_miejsc = new List<Miejsca>();
@@ -40,6 +40,14 @@ namespace ClassLibrary
             lista_miejsc.Add(new Miejsca("Praga", "Praga jest miejscem magicznym. Jej każdy zaułek oczarowuje. Dla mnie to przede wszystkim miasto mrocznych wież ( o tym później) pysznego, choć trochę ciężkiego jedzenia i absolutnie wspaniałych zdobień na budynkach. ", "256"));
             lista_miejsc.Add(new Miejsca("Toronto", "To największe miasto Kanady położone nad jeziorem Ontario w południowej części prowincji Ontario, której jest stolicą. To niezwykle turystyczne miasto wyróżnia się pod wieloma względami.", "358"));
             lista_miejsc.Add(new Miejsca("Moskwa", "Przyjechaliście do Rosji w celach biznesowych albo macie kilkugodzinną przesiadkę? Zapraszamy Was na spacer po głównych atrakcjach stolicy Moskwy zlokalizowanych wokół Placu Czerwonego. Jeśli oprócz „turystycznego moskiewskiego standardu” chcecie zobaczyć więcej miejsc do zwiedzania, to zapraszamy Was na wpis z nietypowymi atrakcjami Moskwy.", "217"));
+            return lista_miejsc;
+            
+
+            
+        }
+        public static void Miejsca_p()
+        {
+            List<Miejsca> lista_miejsc = Lista_miejsc();
 
             foreach (Miejsca lista_miejsca in lista_miejsc)
             {
@@ -47,8 +55,11 @@ namespace ClassLibrary
                 Console.WriteLine();
             }
 
-
         }
+
+
+
+
 
     }
 }

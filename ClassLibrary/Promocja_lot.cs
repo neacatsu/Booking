@@ -22,6 +22,14 @@ namespace ClassLibrary
             Console.WriteLine("Obecna promocja na loty: " + miejsca_promocja[losowa_liczba, 0] + " " + miejsca_promocja[losowa_liczba, 1] + " zł");
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();
+            
+           
+            
+            
+
+
         }
+
+
     }
 }

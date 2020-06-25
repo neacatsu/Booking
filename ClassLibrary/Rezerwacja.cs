@@ -8,9 +8,10 @@ namespace ClassLibrary
 {
     public class Rezerwacja
     {
-        public static void Rezerwacja_(string miejsce_wylotu, string cel_podrozy, string[] data_wylotu, int ilosc_pasazerow, string klasa)
+        public static void Rezerwacja_(string miejsce_wylotu, string cel_podrozy, DateTime data_podrozy, int ilosc_pasazerow, string klasa)
         {
             Console.Clear();
+
             int num1;
             if (int.TryParse(miejsce_wylotu, out num1) == true)
             {
@@ -90,6 +91,51 @@ namespace ClassLibrary
             }
             else Console.WriteLine(miejsce_wylotu);
 
+
+            List<Miejsca_podrozy.Miejsca> lista_cen = Miejsca_podrozy.Lista_miejsc();
+
+            string[] tablica_miejsc = new string[10];
+            int[] tablica_cen = new int[10];
+            int i = 0;
+            foreach (Miejsca_podrozy.Miejsca lista_cennik in lista_cen)
+            {
+                tablica_miejsc[i] = lista_cennik.Nazwa;
+                tablica_cen[i] = int.Parse(lista_cennik.Cena);
+                i++;
+            }
+
+            DateTime thisDay = DateTime.Now;
+            TimeSpan czas = data_podrozy - thisDay;
+            int wielkosc_czas = czas.Days;
+            int w = 0;
+            double znizka = 0;
+            for (int xi = 0; xi < 10; xi++)
+            {
+                if (wielkosc_czas > 30)
+                {
+                    if (cel_podrozy == tablica_miejsc[xi])
+                    {
+                        w = xi;
+                        znizka = tablica_cen[xi]*0.95;
+                    }
+                }
+
+            }
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
     }
 }

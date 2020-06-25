@@ -35,6 +35,8 @@ namespace ClassLibrary
                 return wartosc_hasla;
             }
         }
+
+
         public static void Rejestracja_()
         {
             Console.Clear();
