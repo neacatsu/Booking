@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,10 +9,9 @@ namespace ClassLibrary
 {
     public class Rezerwacja
     {
-        public static void Rezerwacja_(string miejsce_wylotu, string cel_podrozy, DateTime data_podrozy, int ilosc_pasazerow, string klasa)
-        {
-            Console.Clear();
 
+        public static string R_miejsce_wylotu(string miejsce_wylotu)
+        {
             int num1;
             if (int.TryParse(miejsce_wylotu, out num1) == true)
             {
@@ -19,18 +19,25 @@ namespace ClassLibrary
                 switch (miejsce_wyl)
                 {
                     case 1:
-                        Console.WriteLine("Kraków");
-                        break;
+                        return "Kraków";
+
                     case 2:
-                        Console.WriteLine("Katowice");
-                        break;
+                        return "Katowice";
+
                     case 3:
-                        Console.WriteLine("Warszawa");
-                        break;
+                        return "Warszawa";
+                    default:
+                        return "Kraków";
+
                 }
             }
-            else Console.WriteLine(miejsce_wylotu);
+            else return miejsce_wylotu;
 
+        }
+
+
+        public static string R_cel_podrozy(string cel_podrozy)
+        {
             int num2;
             if (int.TryParse(cel_podrozy, out num2) == true)
             {
@@ -38,59 +45,61 @@ namespace ClassLibrary
                 switch (cel_pod)
                 {
                     case 1:
-                        Console.WriteLine("Grecja");
-                        break;
+                        return "Grecja";
                     case 2:
-                        Console.WriteLine("Bali");
-                        break;
+                        return "Bali";
                     case 3:
-                        Console.WriteLine("Lacjum");
-                        break;
+                        return "Lacjum";
                     case 4:
-                        Console.WriteLine("Berlin");
-                        break;
+                        return "Berlin";
                     case 5:
-                        Console.WriteLine("Stambuł");
-                        break;
+                        return "Stambuł";
                     case 6:
-                        Console.WriteLine("Oslo");
-                        break;
+                        return "Oslo";
                     case 7:
-                        Console.WriteLine("Kenya");
-                        break;
+                        return "Kenya";
                     case 8:
-                        Console.WriteLine("Praga");
-                        break;
+                        return "Praga";
                     case 9:
-                        Console.WriteLine("Toronto");
-                        break;
+                        return "Toronto";
                     case 10:
-                        Console.WriteLine("Moskwa");
-                        break;
+                        return "Moskwa";
+                    default:
+                        return "Grecja";
 
                 }
             }
-            else Console.WriteLine(cel_podrozy);
+            else return cel_podrozy;
+        }
 
+
+        public static string R_klasa(string klasa)
+        {
             int num3;
             if (int.TryParse(klasa, out num3) == true)
             {
-                int kl = int.Parse(miejsce_wylotu);
+                int kl = int.Parse(klasa);
                 switch (kl)
                 {
                     case 1:
-                        Console.WriteLine("Biznesowa");
-                        break;
+                        return "Biznesowa";
                     case 2:
-                        Console.WriteLine("Ekonomiczna");
-                        break;
+                        return "Ekonomiczna";
                     case 3:
-                        Console.WriteLine("AllInclusive");
-                        break;
+                        return "AllInclusive";
+                    default:
+                        return "Biznesowa";
                 }
             }
-            else Console.WriteLine(miejsce_wylotu);
+            else return klasa;
+        }
 
+
+
+
+        public static string Rezerwacja_(string miejsce_wylotu, string cel_podrozy, DateTime data_podrozy, int ilosc_pasazerow, string klasa)
+        {
+            Console.Clear();
 
             List<Miejsca_podrozy.Miejsca> lista_cen = Miejsca_podrozy.Lista_miejsc();
 
@@ -121,21 +130,12 @@ namespace ClassLibrary
                 }
 
             }
-
-
-
-
+            return "";
 
 
 
 
         }
-
-
-
-
-
-
 
     }
 }

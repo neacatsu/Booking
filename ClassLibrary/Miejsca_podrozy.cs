@@ -45,15 +45,16 @@ namespace ClassLibrary
 
             
         }
-        public static void Miejsca_p()
+        public static string Miejsca_p()
         {
             List<Miejsca> lista_miejsc = Lista_miejsc();
-
+            string wyswietlanie = "";
             foreach (Miejsca lista_miejsca in lista_miejsc)
             {
-                Console.WriteLine(" \nMiejsce: " + lista_miejsca.Nazwa + " \nZabytki: " + lista_miejsca.Zabytki + "\nCena: " + lista_miejsca.Cena + "zł/za os");
-                Console.WriteLine();
+                wyswietlanie += $" \nMiejsce: { lista_miejsca.Nazwa} \nZabytki: { lista_miejsca.Zabytki} \nCena: { lista_miejsca.Cena} zł/za os \n";               
             }
+            return wyswietlanie;
+
 
         }
 

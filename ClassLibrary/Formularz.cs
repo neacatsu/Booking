@@ -72,41 +72,13 @@ namespace ClassLibrary
             }
             Console.WriteLine("Wybierz klase:");
             var klasa = Console.ReadLine();
-            
-            Wybor_miejsca(ilosc_pasazerow);
-            Rezerwacja.Rezerwacja_( miejsce_wylotu,  cel_podrozy,  data_podrozy,  ilosc_pasazerow,  klasa);
+
+            Wybor_miejsc.Wybor_miejsc_(ilosc_pasazerow);
+            Console.WriteLine(Rezerwacja.Rezerwacja_( miejsce_wylotu,  cel_podrozy,  data_podrozy,  ilosc_pasazerow,  klasa));
 
 
         }
 
-        public static void Wybor_miejsca(int ilosc_pasazerow)
-
-
-        {
-            Console.WriteLine();
-            string[,] tablica = new string[16, 6] {
-            {"X" ,"A", "B","" ,"C", "D"}, {"1" ,"O", "O", "" , "O", "O"}, {"2" ,"O", "O","" ,"O", "O"}, {"3" ,"O", "O","" ,"O", "O"}, {"4" ,"O", "O", "","O", "O"},
-            {"5" ,"O", "O", "", "O", "O"}, {"5" ,"O", "O", "" ,"O", "O"}, {"6" ,"O", "O","" ,"O", "O"}, {"7" ,"O", "O", "","O", "O"},{"8" ,"O", "O","" ,"O", "O"},{"9" ,"O", "O", "","O", "O"},
-            {"10" ,"O", "O","" , "O", "O"},{"11" ,"O", "O", "" ,"O", "O"},{"12" ,"O", "O", "","O", "O"},{"13" ,"O", "O", "","O", "O"},{"14" ,"O", "O", "","O", "O"}
-            };
-
-            for (int i = 0; i < tablica.GetLength(0); i++)
-            {
-                for (int j = 0; j < tablica.GetLength(1); j++)
-                {
-                    Console.Write(tablica[i, j] + "\t");
-                }
-                Console.WriteLine();
-            }
-            for(int i=0;i< ilosc_pasazerow; i++)
-            {
-                int j = i + 1;
-                Console.WriteLine("Wybierz miejsce dla "+ j +" pasazera");
-                string[] wartosc_miejsca = Console.ReadLine().Split(' ');
-            }
-            
-            
-
-        }
+        
     }
 }

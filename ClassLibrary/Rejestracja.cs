@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading;
+
 
 namespace ClassLibrary
 {
@@ -20,20 +20,22 @@ namespace ClassLibrary
 
         public static string Sprawdzanie_hasla(string wartosc_hasla)
         {
-            if (wartosc_hasla.Length <= 8)
-            {
-                Console.WriteLine("Hasło jest za krótkie, podaj nowe hasło");
-                return Sprawdzanie_hasla(Console.ReadLine());
+                      
+            if (wartosc_hasla.Length <= 8) { 
+            
+               throw new ArgumentException("Hasło jest za krótkie, podaj nowe hasło");
+                
             }
             else if (wartosc_hasla.Any(ch => Char.IsSymbol(ch)))
             {
-                Console.WriteLine("Hasło nie posiada znaku specjalnego, podaj nowe hasło");
-                return Sprawdzanie_hasla(Console.ReadLine());
-            }
-            else
+                throw new ArgumentException("Hasło nie posiada znaku specjalnego, podaj nowe hasło");
+                
+            } 
+            else 
             {
-                return wartosc_hasla;
+                return "true";
             }
+            
         }
 
 
@@ -46,7 +48,14 @@ namespace ClassLibrary
             Console.Write("Podaj hasło: ");
             string wartosc_hasla = Console.ReadLine();
 
+            if (Sprawdzanie_hasla(wartosc_hasla) == "true")
+            {
+                input.Add(wartosc_hasla);
+            }
             input.Add(Sprawdzanie_hasla(wartosc_hasla));
+
+
+
 
             List<List<string>> dane_logowania = new List<List<string>>();
             dane_logowania.Add(input);
@@ -61,10 +70,6 @@ namespace ClassLibrary
                     }
                 }
             }
-            Console.WriteLine("Zostałeś pomyślnie zarejestrowany");
-            Thread.Sleep(2000);
-            Console.Clear();
-            Logowanie.Logowanie_();
 
         }
     }
