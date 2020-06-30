@@ -38,7 +38,7 @@ namespace ClassLibrary
             }
             string[] wartosc_miejsca_pion = new string[ilosc_pasazerow];
             string[] wartosc_miejsca_poziom = new string[ilosc_pasazerow];
-            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2];
+            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2] {};
            // string text = "Wybierz miejsce dla pasazerow";
 
             for (int i = 0; i < ilosc_pasazerow; i++)

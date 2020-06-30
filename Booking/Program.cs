@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary;
 using System.Threading;
+using System.IO;
 
 namespace Booking
 {
-    class Program
+    public class Program
     {
         static void Main()
         {
@@ -38,6 +39,36 @@ namespace Booking
             Console.WriteLine("3. Rejestracja ");
             Console.WriteLine("4. Logowanie do systemu ");
         }
+
+
+        public static void panel_log(string login, string haslo)
+        {
+            if(Logowanie.Logowanie_(login, haslo) == true)
+            {
+                Console.WriteLine("Witaj użytkowniku " + login);
+            }
+            else
+            {
+                Console.WriteLine("Błędny login lub hasło");
+                Logowanie.Logowanie_(login, haslo);
+            }
+        }
+
+
+        public static string[] text(int ilosc_pasazerow) {
+
+            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2];
+            for (int i = 0; i < ilosc_pasazerow; i++)
+            {
+                Console.WriteLine("Miejsce dla pasazera"+i);
+                wartosc_miejsca = Console.ReadLine().Split(' ');
+            }
+            return wartosc_miejsca;
+        }
+
+
+
+
         public static void Wybor_menu(int numer)
         {
 
@@ -54,14 +85,21 @@ namespace Booking
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                 case 3:
-                    Rejestracja.Rejestracja_();
-                    Console.WriteLine("Zostałeś pomyślnie zarejestrowany");
-                    Thread.Sleep(2000);
                     Console.Clear();
-                    Logowanie.Logowanie_();
+                    Console.WriteLine("Podaj login: ");
+                    Rejestracja.Rejestracja_();
+                    Console.WriteLine("Podaj hasło: ");
+                    Console.WriteLine("Zostałeś pomyślnie zarejestrowany");              
                     break;
                 case 4:
-                    // Logowanie.Logowanie_ ();
+                    Console.Clear();
+                    Console.WriteLine("Podaj login");
+                    string login = Console.ReadLine();
+                    Console.WriteLine("Podaj haslo");
+                    string haslo = Console.ReadLine();
+                    Logowanie.Logowanie_ (login, haslo);
+                    panel_log(login, haslo);
+                    Formularz.Form();
                     break;
                 default:
                     Console.Clear();

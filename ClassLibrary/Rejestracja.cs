@@ -6,71 +6,92 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography.X509Certificates;
-
+using System.CodeDom;
 
 namespace ClassLibrary
 {
     public class Rejestracja
     {
-        static bool IsSymbol(char c)
+
+        public class Dane_Logowania
         {
-            return c > 32 && c < 127;
+            public string Login { get; private set; }
+            public string Haslo { get; private set; }
+            
+
+            public Dane_Logowania(string login, string haslo)
+            {
+                Login = login;
+                Haslo = haslo;
+
+            }
         }
 
-
-        public static string Sprawdzanie_hasla(string wartosc_hasla)
+        public static bool Sprawdzanie_hasla(string wartosc_hasla)
         {
-                      
-            if (wartosc_hasla.Length <= 8) { 
-            
-               throw new ArgumentException("Hasło jest za krótkie, podaj nowe hasło");
-                
-            }
-            else if (wartosc_hasla.Any(ch => Char.IsSymbol(ch)))
-            {
-                throw new ArgumentException("Hasło nie posiada znaku specjalnego, podaj nowe hasło");
-                
-            } 
-            else 
-            {
-                return "true";
-            }
-            
+            if (wartosc_hasla.Length <= 8) return false;
+            else if (wartosc_hasla.Any(ch => Char.IsSymbol(ch))) return false;
+            else return true;
+
         }
 
+        public static bool Sprawdzanie_loginu(string wartosc_login)
+        {
+            foreach (string linia in File.ReadLines("build.txt"))
+            {
+                if (linia.Contains(wartosc_login)) return false;
+            }
+            return true;
+        }
 
+        public static bool Blad_loginu(bool wartosc)
+        {
+            if (wartosc == true) return true;
+            return false;
+        }
+
+        public static string Login()
+        {
+            bool poprawny_login = false;
+            string login = "";
+            while (!poprawny_login)
+            {
+                login = Console.ReadLine();
+                poprawny_login = Sprawdzanie_loginu(login);
+                if (!poprawny_login) Blad_loginu(true);
+
+            }
+            return login;
+        }
+
+        public static string Haslo()
+        {
+            bool poprawne_haslo = false;
+            string haslo = "";
+            while (!poprawne_haslo)
+            {
+                haslo = Console.ReadLine();
+                poprawne_haslo = Sprawdzanie_hasla(haslo);
+               
+            }
+            return haslo;
+        }
+
+        
         public static void Rejestracja_()
         {
-            Console.Clear();
-            Console.Write("Podaj nową nazwę użytkownika: ");
-            List<String> input = new List<string>();
-            input.Add(Console.ReadLine());
-            Console.Write("Podaj hasło: ");
-            string wartosc_hasla = Console.ReadLine();
-
-            if (Sprawdzanie_hasla(wartosc_hasla) == "true")
-            {
-                input.Add(wartosc_hasla);
-            }
-            input.Add(Sprawdzanie_hasla(wartosc_hasla));
+            List<Dane_Logowania> input = new List<Dane_Logowania>();
+            input.Add(new Dane_Logowania(Login(), Haslo()));
 
 
-
-
-            List<List<string>> dane_logowania = new List<List<string>>();
-            dane_logowania.Add(input);
-
-            for (int i = 0; i < dane_logowania.Count; i++)
-            {
-                for (int j = 0; j < input.Count; j++)
-                {
-                    using (var writer = File.AppendText("build.txt"))
-                    {
-                        writer.WriteLine(dane_logowania[i][j]);
-                    }
-                }
-            }
-
+            foreach(Dane_Logowania dane in input)
+               using (var writer = File.AppendText("build.txt"))
+               {
+                    writer.WriteLine(dane.Login);
+                    writer.WriteLine(dane.Haslo);
+               }
         }
     }
+
 }
+    
