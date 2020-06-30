@@ -67,6 +67,46 @@ namespace Booking
         }
 
 
+        public static void Form()
+        {
+            var miejsce_enum = Enum.GetNames(typeof(Formularz.Miejsca)).Length;
+            for (int i = 0; i < miejsce_enum; i++)
+            {
+                Console.WriteLine(i + 1 + " " + (Formularz.Miejsca)i);
+            }
+            Console.WriteLine("Podaj miejsce wylotu");
+            var miejsce_wylotu = Console.ReadLine();
+
+
+
+            var cel_enum = Enum.GetNames(typeof(Formularz.Cel)).Length;
+            for (int i = 0; i < cel_enum; i++)
+            {
+                Console.WriteLine(i + 1 + " " + (Formularz.Cel)i);
+            }
+            Console.WriteLine("Podaj cel podróży");
+            var cel_podrozy = Console.ReadLine();
+
+            Console.WriteLine("Podaj date podróży (dd/mm/yyyy)");
+            DateTime data_podrozy = Convert.ToDateTime(Console.ReadLine());
+
+            Console.WriteLine("Podaj ilosc pasażerów");
+            int ilosc_pasazerow = int.Parse(Console.ReadLine());
+
+
+            var klasa_enum = Enum.GetNames(typeof(Formularz.Klasa)).Length;
+            for (int i = 0; i < klasa_enum; i++)
+            {
+                Console.WriteLine(i + 1 + " " + (Formularz.Klasa)i);
+            }
+            Console.WriteLine("Wybierz klase:");
+            var klasa = Console.ReadLine();
+
+            Wybor_miejsc.Wybor_miejsc_(ilosc_pasazerow);
+            Console.WriteLine(Rezerwacja.Rezerwacja_(miejsce_wylotu, cel_podrozy, data_podrozy, ilosc_pasazerow, klasa));
+
+
+        }
 
 
         public static void Wybor_menu(int numer)
@@ -93,13 +133,14 @@ namespace Booking
                     break;
                 case 4:
                     Console.Clear();
-                    Console.WriteLine("Podaj login");
+                    Console.Write("Podaj login: ");
                     string login = Console.ReadLine();
-                    Console.WriteLine("Podaj haslo");
+                    Console.Write("Podaj haslo: ");
                     string haslo = Console.ReadLine();
                     Logowanie.Logowanie_ (login, haslo);
                     panel_log(login, haslo);
-                    Formularz.Form();
+                    Console.WriteLine();
+                    Form();
                     break;
                 default:
                     Console.Clear();

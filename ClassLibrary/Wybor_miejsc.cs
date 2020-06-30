@@ -36,38 +36,56 @@ namespace ClassLibrary
                 }
                 Console.WriteLine();
             }
-            string[] wartosc_miejsca_pion = new string[ilosc_pasazerow];
-            string[] wartosc_miejsca_poziom = new string[ilosc_pasazerow];
-            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2] {};
-           // string text = "Wybierz miejsce dla pasazerow";
+            char[] wartosc_miejsca_pion = new char[ilosc_pasazerow];
+            char[] wartosc_miejsca_poziom = new char[ilosc_pasazerow];
+            char[] wartosc_miejsca = new char[ilosc_pasazerow * 2];
+            // string text = "Wybierz miejsce dla pasazerow";
 
             for (int i = 0; i < ilosc_pasazerow; i++)
             {
                 int j = i + 1;
                 Console.WriteLine("Wybierz miejsce dla " + j + " pasazera");
-                wartosc_miejsca = Console.ReadLine().Split(' ');
+                string miejsce = Console.ReadLine();
+                wartosc_miejsca = miejsce.ToCharArray();
             }
 
-            for(int i = 0; i < wartosc_miejsca.Length; i += 2)
+            for (int i = 0; i < wartosc_miejsca.Length; i += 2)
             {
                 wartosc_miejsca_pion[i] = wartosc_miejsca[i];
                 wartosc_miejsca_poziom[i] = wartosc_miejsca[i + 1];
+            }
+
+            for (int i = 0; i < wartosc_miejsca_pion.Length; i++)
+            {
+                for (int j = 0; j < wartosc_miejsca_poziom.Length; j++)
+                {
+                    if (j == 3) j++;
+                    if (tablica_miejsc[wartosc_miejsca_pion[i], wartosc_miejsca_poziom[j]] == "0")
+                    {
+                        tablica_miejsc[wartosc_miejsca_pion[i], wartosc_miejsca_poziom[j]] = "X";
+                    }
+                }
             }
 
             for (int i = 0; i < ilosc_pasazerow; i++)
             {
                 for (int j = 0; j < wartosc_miejsca_pion.Length; j++)
                 {
+                        using (var writer = File.AppendText("wyb_m.txt"))
+                        {
+                            writer.WriteLine(dane.Login);
+                        }
 
+  
                 }
+
+
+
+
+
+
+
             }
-
-
-
-
-
-
-
         }
     }
 }

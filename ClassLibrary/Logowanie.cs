@@ -15,6 +15,7 @@ namespace ClassLibrary
 
         public static bool Logowanie_(string login, string haslo)
         {
+            Console.Clear();
             string a_login = login;
             string a_haslo = haslo;
             string sciezka = @"build.txt";
