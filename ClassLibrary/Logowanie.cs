@@ -13,18 +13,22 @@ namespace ClassLibrary
     public class Logowanie
     {
 
-        public static bool Logowanie_(string login, string haslo)
+        public static bool Login(string login)
         {
             Console.Clear();
-            string a_login = login;
-            string a_haslo = haslo;
-            string sciezka = @"build.txt";
-            string[] tab = File.ReadAllLines(sciezka);
-
-            foreach (string linia in File.ReadLines("build.txt"))
+            foreach (string linia in File.ReadLines(@"build.txt"))
             {
-                if (linia.Contains(a_login)) return true;
-                
+                if (linia == login) return true;
+            }
+            return false;
+        }
+
+        public static bool Haslo(string haslo)
+        {
+            Console.Clear();
+            foreach (string linia in File.ReadLines(@"build.txt"))
+            {
+                if (linia == haslo) return true;
             }
             return false;
         }

@@ -36,26 +36,39 @@ namespace Booking
             Console.WriteLine("MENU");
             Console.WriteLine("1. Polecane miejsca");
             Console.WriteLine("2. Aktualna promocja");
+            Console.WriteLine("2. Aktualna promocja");
             Console.WriteLine("3. Rejestracja ");
             Console.WriteLine("4. Logowanie do systemu ");
+            Console.Write("Twój wybór: ");
         }
 
 
-        public static void panel_log(string login, string haslo)
+        public static void Panel_log(bool wartosc, string login, string haslo)
         {
-            if(Logowanie.Logowanie_(login, haslo) == true)
-            {
-                Console.WriteLine("Witaj użytkowniku " + login);
-            }
+            if (wartosc) Console.WriteLine("Witaj użytkowniku " + login);
             else
             {
                 Console.WriteLine("Błędny login lub hasło");
-                Logowanie.Logowanie_(login, haslo);
+                string nowy_login = Podaj_login();
+                string nowe_haslo = Podaj_haslo();
+                if (Logowanie.Login(nowy_login) == true && Logowanie.Haslo(nowe_haslo) == true) Panel_log(true, nowy_login, nowe_haslo);
+                else Panel_log(false, nowy_login, nowe_haslo);
             }
+        }
+        public static string Podaj_login()
+        {
+            Console.Write("Podaj login: ");
+            return Console.ReadLine();
+        }
+
+        public static string Podaj_haslo()
+        {
+            Console.Write("Podaj haslo: ");
+            return Console.ReadLine();
         }
 
 
-        public static string[] text(int ilosc_pasazerow) {
+        public static string[] Text(int ilosc_pasazerow) {
 
             string[] wartosc_miejsca = new string[ilosc_pasazerow * 2];
             for (int i = 0; i < ilosc_pasazerow; i++)
@@ -65,10 +78,21 @@ namespace Booking
             }
             return wartosc_miejsca;
         }
-
+        public static void Wyswietl_miejsca(string[,] tablica_miejsc)
+        {
+            for (int i = 0; i < tablica_miejsc.GetLength(0); i++)
+            {
+                for (int j = 0; j < tablica_miejsc.GetLength(1); j++)
+                {
+                    Console.Write(tablica_miejsc[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
 
         public static void Form()
         {
+            // POBIERANIE MIEJSCA WYLOTY
             var miejsce_enum = Enum.GetNames(typeof(Formularz.Miejsca)).Length;
             for (int i = 0; i < miejsce_enum; i++)
             {
@@ -77,8 +101,7 @@ namespace Booking
             Console.WriteLine("Podaj miejsce wylotu");
             var miejsce_wylotu = Console.ReadLine();
 
-
-
+            // POBIERANIE CELU PODROZY
             var cel_enum = Enum.GetNames(typeof(Formularz.Cel)).Length;
             for (int i = 0; i < cel_enum; i++)
             {
@@ -87,13 +110,13 @@ namespace Booking
             Console.WriteLine("Podaj cel podróży");
             var cel_podrozy = Console.ReadLine();
 
+            // POBIERANIE DATY PODROZY
             Console.WriteLine("Podaj date podróży (dd/mm/yyyy)");
             DateTime data_podrozy = Convert.ToDateTime(Console.ReadLine());
 
-            Console.WriteLine("Podaj ilosc pasażerów");
-            int ilosc_pasazerow = int.Parse(Console.ReadLine());
+            
 
-
+            // POBIERANIE KLASY LOTU
             var klasa_enum = Enum.GetNames(typeof(Formularz.Klasa)).Length;
             for (int i = 0; i < klasa_enum; i++)
             {
@@ -102,9 +125,38 @@ namespace Booking
             Console.WriteLine("Wybierz klase:");
             var klasa = Console.ReadLine();
 
-            Wybor_miejsc.Wybor_miejsc_(ilosc_pasazerow);
-            Console.WriteLine(Rezerwacja.Rezerwacja_(miejsce_wylotu, cel_podrozy, data_podrozy, ilosc_pasazerow, klasa));
+            // POBIERANIE ILOSCI PASAZEROW
+            Console.WriteLine("Podaj ilosc pasażerów");
+            int ilosc_pasazerow = int.Parse(Console.ReadLine());
 
+
+            // SPOWYWANIE ICH WYBORU MIEJSC
+            string[] wynik_miejsca = new string[ilosc_pasazerow * 2];
+            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2];
+            string[,] tablica_miejsc = Wybor_miejsc.Odczyt_miejsc();
+            if (Wybor_miejsc.Czy_pelny(tablica_miejsc) == false) Console.WriteLine("Obecnie samolot jest przepełniony, wpisz swoje wartości, a my udostępnimy Ci nowy samolot!");
+            else Console.WriteLine("Obecne miejsca: ");
+            Wyswietl_miejsca(tablica_miejsc);
+
+            for (int i = 0; i < ilosc_pasazerow; i++)
+            {
+                int j = i + 1;
+                Console.Write("Wybierz miejsce dla " + j + " pasażera: ");
+                string miejsce = Console.ReadLine();
+                wynik_miejsca = Wybor_miejsc.Wartosc_miejsc(wartosc_miejsca, miejsce, j);
+            }
+            Console.WriteLine();
+
+            // ZAMIANA MIEJSC
+            if (Wybor_miejsc.Czy_pelny(tablica_miejsc) == false) tablica_miejsc = Wybor_miejsc.Zamiana_wartosci(tablica_miejsc, wynik_miejsca, ilosc_pasazerow);
+            tablica_miejsc = Wybor_miejsc.Zamiana_wartosci(tablica_miejsc, wynik_miejsca, ilosc_pasazerow);
+            Console.WriteLine("Miejsca po zarezerwowaniu: ");
+            Wyswietl_miejsca(tablica_miejsc);
+            Console.Write("Nacisnij cokolwiek, aby przejsc dalej...");
+            Console.ReadLine();
+            Wybor_miejsc.Zapis_miejsc(tablica_miejsc);
+
+            //Console.WriteLine(Rezerwacja.Rezerwacja_(miejsce_wylotu, cel_podrozy, data_podrozy, ilosc_pasazerow, klasa));
 
         }
 
@@ -133,12 +185,10 @@ namespace Booking
                     break;
                 case 4:
                     Console.Clear();
-                    Console.Write("Podaj login: ");
-                    string login = Console.ReadLine();
-                    Console.Write("Podaj haslo: ");
-                    string haslo = Console.ReadLine();
-                    Logowanie.Logowanie_ (login, haslo);
-                    panel_log(login, haslo);
+                    string login = Podaj_login();
+                    string haslo = Podaj_haslo();
+                    if (Logowanie.Login(login) == true && Logowanie.Haslo(haslo) == true) Panel_log(true, login, haslo);
+                    else Panel_log(false, login, haslo);
                     Console.WriteLine();
                     Form();
                     break;
