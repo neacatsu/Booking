@@ -97,7 +97,7 @@ namespace ClassLibrary
 
 
 
-        public static string Rezerwacja_(string miejsce_wylotu, string cel_podrozy, DateTime data_podrozy, int ilosc_pasazerow, string klasa)
+        public static double Rezerwacja_(string cel_podrozy, DateTime data_podrozy)
         {
             Console.Clear();
 
@@ -116,26 +116,21 @@ namespace ClassLibrary
             DateTime thisDay = DateTime.Now;
             TimeSpan czas = data_podrozy - thisDay;
             int wielkosc_czas = czas.Days;
-            int w = 0;
-            double znizka = 0;
+            
             for (int xi = 0; xi < 10; xi++)
             {
-                if (wielkosc_czas > 30)
+                if (cel_podrozy == tablica_miejsc[xi])
                 {
-                    if (cel_podrozy == tablica_miejsc[xi])
+                    if (wielkosc_czas > 30)
                     {
-                        w = xi;
-                        znizka = tablica_cen[xi]*0.95;
+                        double znizka = tablica_cen[xi]*0.95;
+                        return znizka;
                     }
+
+                    return tablica_cen[xi];
                 }
-
             }
-            return "";
-
-
-
-
+            return 5;
         }
-
     }
 }

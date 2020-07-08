@@ -109,12 +109,16 @@ namespace Booking
             }
             Console.WriteLine("Podaj cel podróży");
             var cel_podrozy = Console.ReadLine();
+            string cel = Rezerwacja.R_cel_podrozy(cel_podrozy);
 
             // POBIERANIE DATY PODROZY
             Console.WriteLine("Podaj date podróży (dd/mm/yyyy)");
             DateTime data_podrozy = Convert.ToDateTime(Console.ReadLine());
-
-            
+            while (data_podrozy < DateTime.Now)
+                {
+                    Console.Write("Błędna data, podaj prawidłową datę: ");
+                    data_podrozy = Convert.ToDateTime(Console.ReadLine());
+            }
 
             // POBIERANIE KLASY LOTU
             var klasa_enum = Enum.GetNames(typeof(Formularz.Klasa)).Length;
@@ -152,14 +156,24 @@ namespace Booking
             tablica_miejsc = Wybor_miejsc.Zamiana_wartosci(tablica_miejsc, wynik_miejsca, ilosc_pasazerow);
             Console.WriteLine("Miejsca po zarezerwowaniu: ");
             Wyswietl_miejsca(tablica_miejsc);
-            Console.Write("Nacisnij cokolwiek, aby przejsc dalej...");
-            Console.ReadLine();
+            
             Wybor_miejsc.Zapis_miejsc(tablica_miejsc);
 
-            //Console.WriteLine(Rezerwacja.Rezerwacja_(miejsce_wylotu, cel_podrozy, data_podrozy, ilosc_pasazerow, klasa));
-
+            double cena = Rezerwacja.Rezerwacja_(cel, data_podrozy);
+            //Rezerwacja.Re(cel, data_podrozy);
+            Wynik(cena, miejsce_wylotu, cel_podrozy, data_podrozy, klasa, ilosc_pasazerow);
         }
 
+        public static void Wynik(double cena,string miejsce_wylotu, string cel_wylotu, DateTime data_podrozy, string klasa, int ilosc_pasazerow)
+        {
+            Console.Clear();
+            Console.WriteLine("REZERWACJA LOTU");
+            Console.WriteLine("Twoje miejsce wylotu "+Rezerwacja.R_miejsce_wylotu(miejsce_wylotu));
+            Console.WriteLine("Cel podróży "+Rezerwacja.R_cel_podrozy(cel_wylotu));
+            Console.WriteLine("Cena za lot dla wszystkich "+cena * ilosc_pasazerow);
+            Console.WriteLine("Data wylotu " +data_podrozy.ToString("dd/MM/yyyy"));
+            Console.WriteLine("Klasa podróży " + Rezerwacja.R_klasa(klasa));
+        }
 
         public static void Wybor_menu(int numer)
         {
