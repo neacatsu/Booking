@@ -28,7 +28,6 @@ namespace Booking
             Console.WriteLine("MENU");
             Console.WriteLine("1. Polecane miejsca");
             Console.WriteLine("2. Aktualna promocja");
-            Console.WriteLine("2. Aktualna promocja");
             Console.WriteLine("3. Rejestracja ");
             Console.WriteLine("4. Logowanie do systemu ");
             Console.Write("Twój wybór: ");
