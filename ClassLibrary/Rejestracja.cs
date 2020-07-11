@@ -7,17 +7,17 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography.X509Certificates;
 using System.CodeDom;
+using System.Globalization;
 
 namespace ClassLibrary
 {
     public class Rejestracja
     {
-
         public class Dane_Logowania
         {
             public string Login { get; private set; }
             public string Haslo { get; private set; }
-            
+
 
             public Dane_Logowania(string login, string haslo)
             {
@@ -49,49 +49,8 @@ namespace ClassLibrary
             if (wartosc == true) return true;
             return false;
         }
-
-        public static string Login()
-        {
-            bool poprawny_login = false;
-            string login = "";
-            while (!poprawny_login)
-            {
-                login = Console.ReadLine();
-                poprawny_login = Sprawdzanie_loginu(login);
-                if (!poprawny_login) Blad_loginu(true);
-
-            }
-            return login;
-        }
-
-        public static string Haslo()
-        {
-            bool poprawne_haslo = false;
-            string haslo = "";
-            while (!poprawne_haslo)
-            {
-                haslo = Console.ReadLine();
-                poprawne_haslo = Sprawdzanie_hasla(haslo);
-               
-            }
-            return haslo;
-        }
-
-        
-        public static void Rejestracja_()
-        {
-            List<Dane_Logowania> input = new List<Dane_Logowania>();
-            input.Add(new Dane_Logowania(Login(), Haslo()));
-
-
-            foreach(Dane_Logowania dane in input)
-               using (var writer = File.AppendText("build.txt"))
-               {
-                    writer.WriteLine(dane.Login);
-                    writer.WriteLine(dane.Haslo);
-               }
-        }
     }
-
 }
-    
+
+            
+           

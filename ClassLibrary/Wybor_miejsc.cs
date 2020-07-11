@@ -10,12 +10,9 @@ namespace ClassLibrary
 {
     public class Wybor_miejsc
     {
-
-
-
         public static string[,] Odczyt_miejsc()
         {
-            // ODCZYT PLIKU DO TABLICY
+           
             string[,] tablica_miejsc = new string[16, 6];
             String wejscie = File.ReadAllText("wyb_m.txt");
             int a = 0;
@@ -32,6 +29,14 @@ namespace ClassLibrary
             return tablica_miejsc;
         }
 
+        public static int Index_poziom(string znak)
+        {
+            if (znak == "A") return 1;
+            else if (znak == "B") return 2;
+            else if (znak == "C") return 4;
+            else return 5;
+        }
+
         public static bool Czy_pelny(string[,] tab)
         {
             for (int i = 1; i < tab.GetLength(0); i++)
@@ -44,6 +49,22 @@ namespace ClassLibrary
             return false;
         }
 
+        public static bool Czy_zajete(string wartosc, string[,] tab)
+        {
+            char[] temp_tab = wartosc.ToCharArray();
+            string wartosc1 = temp_tab[0].ToString();
+            string wartosc2 = temp_tab[1].ToString();
+            if (temp_tab.Length == 3)
+                wartosc2 = String.Concat(temp_tab[1], temp_tab[2]);
+
+            int index_poziom = Index_poziom(wartosc1);
+            int index_pion = int.Parse(wartosc2);
+
+            if (index_pion > 14 || (wartosc1 != "A" && wartosc1 != "B" && wartosc1 != "C" && wartosc1 != "D")) return false;
+            if (tab[index_pion, index_poziom] == "X") return false;
+
+            return true;
+        }
 
 
         public static string[] Wartosc_miejsc(string[] tab, string wartosc, int ilosc)
@@ -72,8 +93,10 @@ namespace ClassLibrary
             // POBIERANIE WARTOSCI INDEXOW
             for (int i = 0; i < wartosc_miejsca.Length; i += 2)
             {
-                for (int j = 1; j < tablica_miejsc.GetLength(1); j++)
+                for (int j = 1; j < tablica_miejsc.GetLength(1); j++) 
+                {
                     if (wartosc_miejsca[i].ToString() == tablica_miejsc[0, j]) poziom[k] = tablica_miejsc[0, j];
+                }
                 k++;
             }
 
@@ -81,18 +104,16 @@ namespace ClassLibrary
             for (int i = 0; i < wartosc_miejsca.Length; i += 2)
             {
                 for (int j = 1; j < tablica_miejsc.GetLength(0); j++)
+                {
                     if (wartosc_miejsca[i + 1].ToString() == tablica_miejsc[j, 0]) index_pion[k] = int.Parse(tablica_miejsc[j, 0]);
+                }
                 k++;
-
             }
 
             // KONWERSJA LITER NA ODPOWIADAJACE LICZBY
             for (int i = 0; i < poziom.Length; i++)
             {
-                if (poziom[i] == "A") index_poziom[i] = 1;
-                else if (poziom[i] == "B") index_poziom[i] = 2;
-                else if (poziom[i] == "C") index_poziom[i] = 4;
-                else if (poziom[i] == "D") index_poziom[i] = 5;
+                index_poziom[i] = Index_poziom(poziom[i]);
             }
 
             // ZAMIANA WARTOSCI 0 NA X

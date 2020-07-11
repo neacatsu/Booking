@@ -12,8 +12,8 @@ namespace ClassLibrary
 
         public static string R_miejsce_wylotu(string miejsce_wylotu)
         {
-            int num1;
-            if (int.TryParse(miejsce_wylotu, out num1) == true)
+           
+            if (int.TryParse(miejsce_wylotu, out _) == true)
             {
                 int miejsce_wyl = int.Parse(miejsce_wylotu);
                 switch (miejsce_wyl)
@@ -38,8 +38,8 @@ namespace ClassLibrary
 
         public static string R_cel_podrozy(string cel_podrozy)
         {
-            int num2;
-            if (int.TryParse(cel_podrozy, out num2) == true)
+           
+            if (int.TryParse(cel_podrozy, out _) == true)
             {
                 int cel_pod = int.Parse(cel_podrozy);
                 switch (cel_pod)
@@ -75,8 +75,7 @@ namespace ClassLibrary
 
         public static string R_klasa(string klasa)
         {
-            int num3;
-            if (int.TryParse(klasa, out num3) == true)
+            if (int.TryParse(klasa, out _) == true)
             {
                 int kl = int.Parse(klasa);
                 switch (kl)

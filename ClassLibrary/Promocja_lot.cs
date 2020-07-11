@@ -19,7 +19,7 @@ namespace ClassLibrary
                 {"Oslo",  "129" },{"Kenya",  "109" },{"Praga",  "129" },{"Toronto",  "119" },{"Moskwa",  "99" }
              };
 
-            return $"{miejsca_promocja[losowa_liczba, 0]} {miejsca_promocja[losowa_liczba, 1]}";
+            return $"{miejsca_promocja[losowa_liczba, 0]} {miejsca_promocja[losowa_liczba, 1]} zł\n";
             
             
             
