@@ -33,37 +33,6 @@ namespace Booking
             Console.Write("Twój wybór: ");
         }
 
-
-        public static void Panel_log(bool wartosc, string login, string haslo)
-        {
-            if (wartosc)
-            {
-                Console.Write("Witaj użytkowniku ");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(login);
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
-            else
-            {
-                Console.WriteLine("Błędny login lub hasło");
-                string nowy_login = Podaj_login();
-                string nowe_haslo = Podaj_haslo();
-                if (Logowanie.Login(nowy_login) == true && Logowanie.Haslo(nowe_haslo) == true) Panel_log(true, nowy_login, nowe_haslo);
-                else Panel_log(false, nowy_login, nowe_haslo);
-            }
-        }
-        public static string Podaj_login()
-        {
-            Console.Write("Podaj login:  ");
-            return Console.ReadLine();
-        }
-
-        public static string Podaj_haslo()
-        {
-            Console.Write("Podaj haslo: ");
-            return Console.ReadLine();
-        }
-
         public static void Rejestracja_(string login, string haslo)
         {
             while (!Rejestracja.Sprawdzanie_loginu(login))
@@ -120,18 +89,36 @@ namespace Booking
             }
             return haslo;
         }
-
-
-        public static string[] Text(int ilosc_pasazerow) {
-
-            string[] wartosc_miejsca = new string[ilosc_pasazerow * 2];
-            for (int i = 0; i < ilosc_pasazerow; i++)
+        public static void Panel_log(bool wartosc, string login, string haslo)
+        {
+            if (wartosc)
             {
-                Console.WriteLine("Miejsce dla pasazera"+i);
-                wartosc_miejsca = Console.ReadLine().Split(' ');
+                Console.Write("Witaj użytkowniku ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(login);
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
-            return wartosc_miejsca;
+            else
+            {
+                Console.WriteLine("Błędny login lub hasło");
+                string nowy_login = Podaj_login();
+                string nowe_haslo = Podaj_haslo();
+                if (Logowanie.Login(nowy_login) == true && Logowanie.Haslo(nowe_haslo) == true) Panel_log(true, nowy_login, nowe_haslo);
+                else Panel_log(false, nowy_login, nowe_haslo);
+            }
         }
+        public static string Podaj_login()
+        {
+            Console.Write("Podaj login: ");
+            return Console.ReadLine();
+        }
+
+        public static string Podaj_haslo()
+        {
+            Console.Write("Podaj haslo: ");
+            return Console.ReadLine();
+        }
+
         public static void Wyswietl_miejsca(string[,] tablica_miejsc)
         {
             for (int i = 0; i < tablica_miejsc.GetLength(0); i++)
@@ -169,6 +156,7 @@ namespace Booking
                 Console.WriteLine();
             }
         }
+
         public static DateTime Do_daty(string data)
         {
             string[] liczby = data.Split(data[2]);
@@ -292,6 +280,7 @@ namespace Booking
             Console.WriteLine("Miejsca po zarezerwowaniu: ");
             Wyswietl_miejsca(tablica_miejsc);
             Wybor_miejsc.Zapis_miejsc(tablica_miejsc);
+
             double cena = Rezerwacja.Rezerwacja_(cel, data_podrozy);
             Wynik(cena, miejsce_wylotu, cel_podrozy, data_podrozy, klasa, ilosc_pasazerow,  tablica_miejsc, wynik_miejsca);
             Console.Clear();
@@ -300,21 +289,25 @@ namespace Booking
         public static void Wynik(double cena,string miejsce_wylotu, string cel_wylotu, DateTime data_podrozy, string klasa, int ilosc_pasazerow, string[,] tablica_miejsc, string[] wartosc_miejsc)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("REZERWACJA LOTU");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine();
             Console.WriteLine("Twoje miejsce wylotu "+Rezerwacja.R_miejsce_wylotu(miejsce_wylotu));
             Console.WriteLine("Cel podróży "+Rezerwacja.R_cel_podrozy(cel_wylotu));
             Console.WriteLine("Cena za lot dla wszystkich pasażerów "+cena * ilosc_pasazerow + " zł");
             Console.WriteLine("Data wylotu " +data_podrozy.ToString("dd/MM/yyyy"));
             Console.WriteLine("Klasa podróży " + Rezerwacja.R_klasa(klasa));
+            Console.WriteLine();
             Console.WriteLine("Zarezerwowane miejsca: ");
             Wyswietl_nowe(tablica_miejsc, wartosc_miejsc);
-            Console.WriteLine("Prosze nacisnac  przycisk, aby kontynuowac...");
+            Console.WriteLine("Prosze nacisnac  enter, aby kontynuowac...");
             Console.ReadLine();
         }
 
         public static void Wybor_menu(int numer)
         {
-
+            Console.Clear();
             switch (numer)
             {
                 case 1:
@@ -323,25 +316,22 @@ namespace Booking
                     Console.Clear();
                     break;
                 case 2:
-                    Console.Clear();
                     Console.Write("Obecna promocja na loty: ");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(Promocja_lot.Promocja());
                     Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                 case 3:
-                    Console.Clear();
                     Console.Write("Podaj login, musi on posiadać conajmniej 8 znaków: ");
                     string nowy_login = Console.ReadLine();
                     Console.Write("Podaj hasło, Twoje hasło musi zawierać conajmniej 8 znaków w tym jeden znak specjalny: ");
                     string nowe_haslo = Console.ReadLine();
                     Rejestracja_(nowy_login, nowe_haslo);
                     Console.WriteLine("Zostałeś pomyślnie zarejestrowany");
-                    Console.WriteLine("\nNaciśnij, aby kontynuować... ");
+                    Console.WriteLine("\nNaciśnij enter aby kontynuować... ");
                     Console.ReadLine();
                     break;
                 case 4:
-                    Console.Clear();
                     string login = Podaj_login();
                     string haslo = Podaj_haslo();
                     if (Logowanie.Login(login) == true && Logowanie.Haslo(haslo) == true) Panel_log(true, login, haslo);
@@ -350,7 +340,6 @@ namespace Booking
                     Form();
                     break;
                 default:
-                    Console.Clear();
                     break;
 
             }

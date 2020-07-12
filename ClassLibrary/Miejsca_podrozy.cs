@@ -19,7 +19,6 @@ namespace ClassLibrary
                 Nazwa = miejsce;
                 Zabytki = zwiedzanie;
                 Cena = koszt;
-
             }
         }
 
@@ -49,17 +48,10 @@ namespace ClassLibrary
             string wyswietlanie = "Obecna oferta \n";
             foreach (Miejsca lista_miejsca in lista_miejsc)
             {
-                wyswietlanie += $" \nMiejsce: { lista_miejsca.Nazwa} \nZabytki: { lista_miejsca.Zabytki} \nCena: { lista_miejsca.Cena} zł/za os \n";               
+                wyswietlanie += $" \nMiejsce: { lista_miejsca.Nazwa} \nZabytki: { lista_miejsca.Zabytki} \nCena: { lista_miejsca.Cena} zł/za os \n";
             }
-            wyswietlanie+= "\nKliknij dowolny przycisk, aby kontynuwować...";
+            wyswietlanie += "\nKliknij dowolny przycisk, aby kontynuwować...";
             return wyswietlanie;
-
-
         }
-
-
-
-
-
     }
 }

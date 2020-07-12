@@ -75,9 +75,8 @@ namespace ClassLibrary
             string wartosc1 = temp_tab[0].ToString();
             string wartosc2 = temp_tab[1].ToString();
             if (temp_tab.Length == 3)
-            {
                 wartosc2 = String.Concat(temp_tab[1], temp_tab[2]);
-            }
+
             tab[i] = wartosc1;
             tab[i + 1] = wartosc2;
             return tab;
@@ -140,7 +139,6 @@ namespace ClassLibrary
                 }
                 return nowe_miejsca;
             }
-
             return tablica_miejsc;
         }
 

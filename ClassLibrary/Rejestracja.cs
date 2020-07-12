@@ -26,13 +26,6 @@ namespace ClassLibrary
             }
         }
 
-        public static bool Sprawdzanie_hasla(string wartosc_hasla)
-        {
-            if (wartosc_hasla.Length <= 8) return false;
-            else if (wartosc_hasla.Any(ch => !Char.IsLetterOrDigit(ch))) return true; 
-            return false;
-        }
-
         public static bool Sprawdzanie_loginu(string wartosc_login)
         {
             foreach (string linia in File.ReadLines("build.txt"))
@@ -45,6 +38,13 @@ namespace ClassLibrary
         public static bool Blad_loginu(bool wartosc)
         {
             if (wartosc == true) return true;
+            return false;
+        }
+
+        public static bool Sprawdzanie_hasla(string wartosc_hasla)
+        {
+            if (wartosc_hasla.Length <= 8) return false;
+            else if (wartosc_hasla.Any(ch => !Char.IsLetterOrDigit(ch))) return true; 
             return false;
         }
     }
