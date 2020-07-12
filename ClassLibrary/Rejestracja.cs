@@ -23,16 +23,14 @@ namespace ClassLibrary
             {
                 Login = login;
                 Haslo = haslo;
-
             }
         }
 
         public static bool Sprawdzanie_hasla(string wartosc_hasla)
         {
             if (wartosc_hasla.Length <= 8) return false;
-            else if (wartosc_hasla.Any(ch => Char.IsSymbol(ch))) return false;
-            else return true;
-
+            else if (wartosc_hasla.Any(ch => !Char.IsLetterOrDigit(ch))) return true; 
+            return false;
         }
 
         public static bool Sprawdzanie_loginu(string wartosc_login)

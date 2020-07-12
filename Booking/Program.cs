@@ -54,7 +54,7 @@ namespace Booking
         }
         public static string Podaj_login()
         {
-            Console.Write("Podaj login: ");
+            Console.Write("Podaj login:  ");
             return Console.ReadLine();
         }
 
@@ -169,26 +169,46 @@ namespace Booking
                 Console.WriteLine();
             }
         }
+        public static DateTime Do_daty(string data)
+        {
+            string[] liczby = data.Split(data[2]);
+            if (int.Parse(liczby[0]) > 31 || int.Parse(liczby[1]) > 12 || int.Parse(liczby[2]) < DateTime.Now.Year) return DateTime.Now;
+            DateTime nowa_data = new DateTime(int.Parse(liczby[2]), int.Parse(liczby[1]), int.Parse(liczby[0]));
+            return nowa_data;
+        }
+
+        public static string Zamiana_miejsc(string fraza)
+        {
+            string zmieniona_fraza = new string(fraza.ToCharArray().Reverse().ToArray());
+            return zmieniona_fraza;
+        }
 
         public static void Form()
         {
             // POBIERANIE MIEJSCA WYLOTY
+            Console.WriteLine("Dostępne miejsca wylotu: ");
             var miejsce_enum = Enum.GetNames(typeof(Formularz.Miejsca)).Length;
             for (int i = 0; i < miejsce_enum; i++)
             {
                 Console.WriteLine(i + 1 + " " + (Formularz.Miejsca)i);
             }
-            Console.WriteLine("Podaj miejsce wylotu");
+            Console.Write("Podaj miejsce wylotu: ");
             var miejsce_wylotu = Console.ReadLine();
             Console.WriteLine();
+            while (!Int32.TryParse(miejsce_wylotu, out _) && !Enum.IsDefined(typeof(Formularz.Miejsca), miejsce_wylotu.ToString()))
+            {
+                Console.Write("Podana wartość jest nieprawdłowa. Proszę spróbowac ponownie: ");
+                miejsce_wylotu = Console.ReadLine();
+            }
 
             // POBIERANIE CELU PODROZY
+            Console.WriteLine("Dostępne miejsca podróży: ");
             var cel_enum = Enum.GetNames(typeof(Formularz.Cel)).Length;
             for (int i = 0; i < cel_enum; i++)
             {
                 Console.WriteLine(i + 1 + " " + (Formularz.Cel)i);
             }
-            Console.WriteLine("Podaj cel podróży");
+            Console.Write("Podaj cel podróży: ");
             var cel_podrozy = Console.ReadLine();
             string cel = Rezerwacja.R_cel_podrozy(cel_podrozy);
             Console.WriteLine();
@@ -199,23 +219,14 @@ namespace Booking
                 cel_podrozy = Console.ReadLine();
             }
 
-            // POBIERANIE DATY PODROZY
-            Console.WriteLine("Podaj date podróży (dd/mm/yyyy)");
-            DateTime data_podrozy = Convert.ToDateTime(Console.ReadLine());
-            while (data_podrozy < DateTime.Now)
-                {
-                    Console.Write("Błędna data, podaj prawidłową datę: ");
-                    data_podrozy = Convert.ToDateTime(Console.ReadLine());
-            }
-            Console.WriteLine();
-
             // POBIERANIE KLASY LOTU
+            Console.WriteLine("Dostępne klasy lotu: ");
             var klasa_enum = Enum.GetNames(typeof(Formularz.Klasa)).Length;
             for (int i = 0; i < klasa_enum; i++)
             {
                 Console.WriteLine(i + 1 + " " + (Formularz.Klasa)i);
             }
-            Console.WriteLine("Wybierz klase:");
+            Console.Write("Wybierz klase: ");
             var klasa = Console.ReadLine();
             Console.WriteLine();
 
@@ -225,8 +236,27 @@ namespace Booking
                 klasa = Console.ReadLine();
             }
 
+            // POBIERANIE DATY PODROZY
+            Console.Write("Podaj date podróży w formacie dd/mm/yyyy: ");
+            string data = Console.ReadLine();
+            char[] znaki = new char[] { '.', '/', ':' };
+            while ((!data.Contains(znaki[0]) && !data.Contains(znaki[1]) && !data.Contains(znaki[2])) || data.Length != 10)
+            {
+                Console.Write("Podana data jest nieprawidłowa. Podaj jeszcze raz: ");
+                data = Console.ReadLine();
+            }
+
+            // KONWERTOWANIE STRINGA NA DATE
+            DateTime data_podrozy = Do_daty(data);
+            while (data_podrozy <= DateTime.Now)
+            {
+                Console.Write("Błędna data, podaj prawidłową datę: ");
+                data_podrozy = Convert.ToDateTime(Console.ReadLine());
+            }
+            Console.WriteLine();
+
             // POBIERANIE ILOSCI PASAZEROW
-            Console.WriteLine("Podaj ilosc pasażerów");
+            Console.Write("Podaj ilosc pasażerów: ");
             int ilosc_pasazerow = int.Parse(Console.ReadLine());
             Console.WriteLine();
 
@@ -243,11 +273,14 @@ namespace Booking
             {
                 int j = i + 1;
                 Console.Write("Wybierz miejsce dla " + j + " pasażera: ");
-                string miejsce = Console.ReadLine();
-                while (Wybor_miejsc.Czy_zajete(miejsce, tablica_miejsc) == false)
+                string miejsce = Console.ReadLine().ToUpper();
+                string pierwszy_znak = miejsce[0].ToString();
+                if (Int32.TryParse(pierwszy_znak, out _)) miejsce = Zamiana_miejsc(miejsce);
+                while (miejsce.Length < 2 || miejsce.Length > 3 || Wybor_miejsc.Czy_zajete(miejsce, tablica_miejsc) == false)
                 {
                     Console.Write("Podano zajęte, bądź nieistniejące miejsce. Prosze podać jeszcze raz: ");
                     miejsce = Console.ReadLine().ToUpper();
+                    if (Int32.TryParse(pierwszy_znak, out _)) miejsce = Zamiana_miejsc(miejsce);
                 }
                 wynik_miejsca = Wybor_miejsc.Wartosc_miejsc(wartosc_miejsca, miejsce, j);
             }
@@ -298,9 +331,9 @@ namespace Booking
                     break;
                 case 3:
                     Console.Clear();
-                    Console.Write("Podaj login: ");
+                    Console.Write("Podaj login, musi on posiadać conajmniej 8 znaków: ");
                     string nowy_login = Console.ReadLine();
-                    Console.Write("Podaj hasło: ");
+                    Console.Write("Podaj hasło, Twoje hasło musi zawierać conajmniej 8 znaków w tym jeden znak specjalny: ");
                     string nowe_haslo = Console.ReadLine();
                     Rejestracja_(nowy_login, nowe_haslo);
                     Console.WriteLine("Zostałeś pomyślnie zarejestrowany");
