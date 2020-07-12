@@ -3,6 +3,7 @@
 #### Projekt został wykonany w technologii C# Solution składa się z dwóch projektów:
 * ClassLibrary – biblioteki klas
 * Program – główny projekt
+
 *Program* służy do wyświetlania wszystkich wyników funkcji w konsoli. Zawiera on również funkcję Form() która pobiera od użytkownika wszystkie potrzebne dane które w późniejszym czasie są zawarte w Rezerwacji - jest to miejsce i cel wylotu, data, ilość pasażerów oraz jaką klasą użytkownik chce podróżować.
 
 ClassLibrary składa sie z 7 poszczególnych klas:
