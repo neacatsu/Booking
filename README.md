@@ -4,7 +4,7 @@
 ClassLibrary składa sie z 7 poszczególnych klas:
 * ***Miejsca_podrozy*** - Jest to klasa zawierająca listę miejsc, ich opisów oraz cen.
 * ***Promocja_lot*** - Klasa ta zawiera losową promocję na dane miejsce z listy.
-* ***Rejestracja*** - Możliwość rejestracji nowego uzytkownika.***
+* ***Rejestracja*** - Możliwość rejestracji nowego uzytkownika.*
 * ***Logowanie*** - Klasa pozwala na zalogowanie się a następnie przenosi nas do formularza rezerwacji lotu.
 * ***Formularz*** - W nim znajdują się 3 enum ktore odnoszą sie do Programu w którym użytkownik decyzuje się na rezerwacje.
 * ***Wybor_miejsc*** - Użytkownik decyduje które miejsce chce wybrać w samolocie.
