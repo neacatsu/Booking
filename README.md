@@ -1,7 +1,7 @@
 # Strona Booking
 ### Projekt "Strona Booking" jest aplikacją umożliwiającą rezerwację biletów na wybrany przez użytkownika lot. W aplikacji pojawia sie okno menu pozwalające na przegląd polecanych miejsc wraz z zabytkami i ceną oraz obecnej promocji na lot. W aplikacji istnieje również możliwość zarejestrowania nowego użytkownika za pomocą login i hasła jak również zalogowanie sie.
 #### Projekt został wykonany w technologii C# Solution składa się z dwóch projektów: • ClassLibrary – biblioteki klas • Program – główny projekt
-Program służy do wyświetlania wszystkich wyników funkcji w konsoli. Zawiera on również funkcję Form() która pobiera od użytkownika wszystkie potrzebne dane które w późniejszym czasie są zawarte w Rezerwacji - jest to miejsce i cel wylotu, data, ilość pasażerów oraz jakaś klasą użytkownik chce podróżować.
+Program służy do wyświetlania wszystkich wyników funkcji w konsoli. Zawiera on również funkcję Form() która pobiera od użytkownika wszystkie potrzebne dane które w późniejszym czasie są zawarte w Rezerwacji - jest to miejsce i cel wylotu, data, ilość pasażerów oraz jaką klasą użytkownik chce podróżować.
 
 ClassLibrary składa sie z 7 poszczególnych klas:
 * ***Miejsca_podrozy*** - Jest to klasa zawierająca listę miejsc, ich opisów oraz cen.
